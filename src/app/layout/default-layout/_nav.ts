@@ -253,29 +253,34 @@ export const navItems: INavData[] = [
   // },
   {
     name: 'User Management',
-    url: '/login',
-    iconComponent: { name: 'cil-star' },
+  //   url: '/login',
+  //   iconComponent: { name: 'cil-user' },
     children: [
-      {
-        name: 'Login',
-        url: '/login',
-        icon: 'nav-icon-bullet'
-      },
+  //     {
+  //       name: 'Login',
+  //       url: '/login',
+  //       icon: 'nav-icon-bullet'
+  //     },
       {
         name: 'Transaction',
-        url: '/register',
+        url: '/transaction',
         icon: 'nav-icon-bullet'
       },
-      // {
-      //   name: 'Error 404',
-      //   url: '/404',
-      //   icon: 'nav-icon-bullet'
-      // },
-      // {
-      //   name: 'Error 500',
-      //   url: '/500',
-      //   icon: 'nav-icon-bullet'
-      // }
+  {
+        name: 'Other Transactions',
+        url: '',
+        icon: 'nav-icon-bullet'
+      },
+  //     // {
+  //     //   name: 'Error 404',
+  //     //   url: '/404',
+  //     //   icon: 'nav-icon-bullet'
+  //     // },
+  //     // {
+  //     //   name: 'Error 500',
+  //     //   url: '/500',
+  //     //   icon: 'nav-icon-bullet'
+  //     // }
     ]
   },
   {

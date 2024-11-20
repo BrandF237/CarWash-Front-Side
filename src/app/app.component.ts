@@ -7,10 +7,14 @@ import { delay, filter, map, tap } from 'rxjs/operators';
 import { ColorModeService } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
+import { UserAuthService } from './services/user-auth.service';  // Importer le service d'authentification
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet />',
+  template: `
+    <router-outlet></router-outlet>
+    <button (click)="logout()">Logout</button>
+  `,
   standalone: true,
   imports: [RouterOutlet]
 })
@@ -24,6 +28,7 @@ export class AppComponent implements OnInit {
 
   readonly #colorModeService = inject(ColorModeService);
   readonly #iconSetService = inject(IconSetService);
+  readonly #authService = inject(UserAuthService);  // Injecter le service d'authentification
 
   constructor() {
     this.#titleService.setTitle(this.title);
@@ -34,10 +39,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.#router.events.pipe(
-        takeUntilDestroyed(this.#destroyRef)
-      ).subscribe((evt) => {
+      takeUntilDestroyed(this.#destroyRef)
+    ).subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
@@ -54,5 +58,11 @@ export class AppComponent implements OnInit {
         takeUntilDestroyed(this.#destroyRef)
       )
       .subscribe();
+  }
+
+  // Méthode pour se déconnecter
+  logout(): void {
+    this.#authService.logout(); // Appelle la méthode logout du service pour supprimer le token
+    this.#router.navigate(['/login']); // Redirige l'utilisateur vers la page de connexion
   }
 }

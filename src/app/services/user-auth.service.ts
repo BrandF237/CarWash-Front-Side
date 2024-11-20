@@ -12,7 +12,7 @@ export class UserAuthService {
   constructor(private http: HttpClient) { }
 
   // Utility method to get token from localStorage
-  private getToken(): string | null {
+  getToken(): string | null {
     return localStorage.getItem('jwt_token');
   }
 

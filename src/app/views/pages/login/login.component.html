@@ -24,7 +24,7 @@
                     cFormControl
                     [ngModelOptions]="{standalone: true}"
                     placeholder="Password"
-
+                    type="password"
                   />
                 </c-input-group>
                 <c-row>
@@ -43,14 +43,14 @@
             </c-card-body>
           </c-card>
           <c-card [ngStyle]="{'minWidth.%': 44}" class="text-white bg-primary py-5">
-            <c-card-body class="text-center">
-              <div>
-                <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register" style="align-items: center">
-                  Register Now!
-                </button>
-              </div>
-            </c-card-body>
-          </c-card>
+  <c-card-body class="d-flex justify-content-center align-items-center text-center" style="height: 100%">
+    <div>
+      <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register">
+        Register Now!
+      </button>
+    </div>
+  </c-card-body>
+</c-card>
         </c-card-group>
       </c-col>
     </c-row>

@@ -1,0 +1,176 @@
+<div class="container mt-4">
+  <!-- Page Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Transactions</h2>
+    <button class="btn btn-success" (click)="openModal()">New Transaction</button>
+  </div>
+
+
+
+  <!-- Filters -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <strong>Filters</strong>
+    </div>
+    <div class="card-body">
+      <form class="row g-3">
+        <div class="col-md-4">
+          <label for="filterDate" class="form-label">Date</label>
+          <input type="date" id="filterDate" class="form-control" [(ngModel)]="filter.date" name="date">
+        </div>
+        <div class="col-md-4">
+          <label for="filterStatus" class="form-label">Transaction Status</label>
+          <select id="filterStatus" class="form-select" [(ngModel)]="filter.status" name="status">
+            <option value="">All</option>
+            <option value="Pay & Collect">Pay & Collect</option>
+            <option value="Paid">Paid</option>
+          </select>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button type="button" class="btn btn-primary w-100" (click)="applyFilters()">Apply Filters</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Transactions Table -->
+  <div class="card">
+    <div class="card-header">
+      <strong>Transaction List</strong>
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-bordered mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Car Type</th>
+            <th>License Plate</th>
+            <th>Price (MUR)</th>
+            <th>Wash Type</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of filteredTransactions">
+            <td>{{ transaction.id }}</td>
+            <td>{{ transaction.carType }}</td>
+            <td>{{ transaction.licensePlate }}</td>
+            <td>{{ transaction.price }}</td>
+            <td>{{ transaction.washType }}</td>
+            <td>{{ transaction.status }}</td>
+            <td>
+              <button *ngIf="transaction.status === 'Pay & Collect'" class="btn btn-warning btn-sm me-2" (click)="payAndCollect(transaction.id)">Pay & Collect</button>
+              <button *ngIf="transaction.status === 'Paid'" class="btn btn-success btn-sm" (click)="collectCar(transaction.id)">Collect Car</button>
+            </td>
+          </tr>
+          <tr *ngIf="filteredTransactions.length === 0">
+            <td colspan="7" class="text-center">No transactions found.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newTransactionModal" tabindex="-1" aria-labelledby="newTransactionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newTransactionModalLabel">New Transaction</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <!-- Client Details Section -->
+          <div class="mb-4">
+            <div class="card-header">
+              <strong>Client Details</strong>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="clientName" class="form-label">Client Name</label>
+                <input type="text" id="clientName" class="form-control" name="clientName" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="clientPhone" class="form-label">Phone Number</label>
+                <input type="tel" id="clientPhone" class="form-control" name="clientPhone" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Car Details Section -->
+          <div class="mb-4">
+            <div class="card-header">
+              <strong>Car Details</strong>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="carType" class="form-label">Car Type</label>
+                <select id="carType" class="form-select" name="carType">
+                  <option value="Van">Van</option>
+                  <option value="4x4">4x4</option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Sports Car">Sports Car</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="licensePlate" class="form-label">License Plate</label>
+                <input type="text" id="licensePlate" class="form-control" name="licensePlate" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wash Details Section -->
+          <div class="mb-4">
+            <div class="card-header">
+              <strong>Wash Details</strong>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="washType" class="form-label">Wash Type</label>
+                <select id="washType" class="form-select" name="washType">
+                  <option value="Basic">Basic</option>
+                  <option value="Premium">Premium</option>
+                  <option value="Deluxe">Deluxe</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="price" class="form-label">Price (MUR)</label>
+                <input type="number" id="price" class="form-control" name="price" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Details Section -->
+          <div class="mb-4">
+            <div class="card-header">
+              <strong>Payment Details</strong>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <label for="paymentStatus" class="form-label">Payment Status</label>
+                <select id="paymentStatus" class="form-select" name="paymentStatus">
+                  <option value="Pending">Pending</option>
+                  <option value="Paid">Paid</option>
+                  <option value="Failed">Failed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save Transaction</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

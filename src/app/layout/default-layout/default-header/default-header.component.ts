@@ -13,6 +13,7 @@ import {
 import { HeaderComponent } from '@coreui/angular';
 import {IconDirective} from "@coreui/icons-angular";
 import {NgTemplateOutlet} from "@angular/common";
+import Notiflix from "notiflix";
 
 @Component({
   selector: 'app-default-header',
@@ -60,6 +61,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   // Fonction de logout
   logout(): void {
     this.authService.logout(); // Appelle la méthode logout du service
+    Notiflix.Notify.info('Logout successful')
     this.router.navigate(['/login']); // Redirige vers la page de login
   }
 

@@ -254,7 +254,7 @@ export const navItems: INavData[] = [
   {
     name: 'User Management',
   //   url: '/login',
-  //   iconComponent: { name: 'cil-user' },
+    iconComponent: { name: 'cil-user' },
     children: [
   //     {
   //       name: 'Login',

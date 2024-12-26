@@ -28,5 +28,12 @@ export const routes: Routes = [
     data: {
       title: 'Register Page'
     }
+  },
+  {
+    path : 'invoice',
+    loadComponent: () => import('./invoice/invoice.component').then(m => m.InvoiceModalComponent),
+    data : {
+      title: 'Invoice Page'
+    }
   }
 ];

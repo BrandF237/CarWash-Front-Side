@@ -7,10 +7,11 @@
   visible
 >
   <c-sidebar-header class="border-bottom">
-    <c-sidebar-brand [routerLink]="[]">
-      <img src="assets/images/avatars/logo.jpg" alt="" height="70" width="150" class="img-fluid" >
-    </c-sidebar-brand>
-  </c-sidebar-header>
+    <div class="d-flex justify-content-center align-items-center">  <c-sidebar-brand [routerLink]="[]">
+            <img src="assets/images/avatars/logo.jpg" alt="" height="70" width="150" class="img-fluid">
+        </c-sidebar-brand>
+    </div>
+</c-sidebar-header>
 
   <ng-scrollbar #scrollbar="ngScrollbar" (updated)="onScrollbarUpdate(scrollbar.state)" class="overflow" pointerEventsMethod="scrollbar" visibility="hover">
     <c-sidebar-nav #overflow [navItems]="navItems" dropdownMode="close" compact />

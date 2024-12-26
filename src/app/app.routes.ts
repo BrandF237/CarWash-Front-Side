@@ -12,7 +12,7 @@ export const routes: Routes = [
     path: '',
     component: DefaultLayoutComponent,
     data: {
-      title: 'Home'
+      title: ''
     },
     canActivate: [AuthGuard], // Protect routes with AuthGuard
     children: [
@@ -20,6 +20,8 @@ export const routes: Routes = [
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
       },
+
+
       {
         path: 'theme',
         loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
@@ -34,7 +36,8 @@ export const routes: Routes = [
         data: {
           title: 'Transaction'
         }
-      }
+      },
+
     ]
   },
   {
@@ -63,6 +66,13 @@ export const routes: Routes = [
     loadComponent: () => import('./views/pages/register/register.component').then(m => m.RegisterComponent),
     data: {
       title: 'Register Page'
+    }
+  },
+    {
+    path : 'invoice',
+    loadComponent: () => import('./views/pages/invoice/invoice.component').then(m => m.InvoiceModalComponent),
+    data : {
+      title: 'Invoice Details'
     }
   },
   { path: '**', redirectTo: 'dashboard' }
